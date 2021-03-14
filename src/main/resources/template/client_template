@@ -1,0 +1,11 @@
+import com.aht.api.order.base.BaseOrderVideoInterviewApi;
+import org.springframework.cloud.openfeign.FeignClient;
+
+/**
+ * {{table_name}} api client
+ *
+ * @author linuxea
+ */
+@FeignClient(name = {{table_api}}.SERVICE_NAME, path = {{table_api}}.CLIENT_PATH)
+public interface {{table_api}}Client extends {{table_api}} {
+}

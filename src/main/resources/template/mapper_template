@@ -1,0 +1,13 @@
+import com.aht.web.base.dao.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+/**
+ * {{table_name}} mapper
+ *
+ * @author linuxea
+ */
+@Mapper
+@Repository
+public interface {{tableCamel}}Mapper extends BaseMapper<{{tablePO}}> {
+}

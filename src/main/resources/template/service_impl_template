@@ -1,0 +1,10 @@
+
+/**
+ * @author linuxea
+ */
+@Service
+@Slf4j
+public class {{tableService}}Impl extends InjectMapperBaseServiceImpl<{{tablePO}}, {{tableMapper}}> implements {{tableService}} {
+
+
+}

@@ -1,0 +1,10 @@
+import com.aht.web.base.service.BaseService;
+
+import java.util.List;
+
+/**
+ * {{table_name}} service
+ *
+ * @author linuxea
+ */
+public interface {{tableCamel}}Service extends BaseService<{{tablePO}}> {

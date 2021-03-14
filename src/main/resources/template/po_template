@@ -1,0 +1,23 @@
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import javax.persistence.Table;
+import java.util.Date;
+
+/**
+ * {{table_name}} po
+ *
+ * @author linuxea
+ */
+@EqualsAndHashCode(callSuper = true)
+@ApiModel(value = "{{table_name}} 表", description = "{{table_name}} 表")
+@Table(name = "{{table_name}}")
+@Data
+public class {{tableCamel}}PO extends BasePO {
+
+{{columns}}
+
+
+}
