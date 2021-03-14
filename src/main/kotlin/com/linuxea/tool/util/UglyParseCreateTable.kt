@@ -10,8 +10,6 @@ class UglyParseCreateTable {
 
         fun parse(createSql: String): List<Column> {
 
-            println("建表语句 $createSql")
-
             val split = createSql.split("\n")
 
             return split
@@ -48,7 +46,13 @@ class UglyParseCreateTable {
                         }
                     }
 
-                    Column(CamelUtil.toCamel(group), typeClass, "无注释")
+                    // 获取注释
+                    val commentPattern = Pattern.compile("COMMENT\\s+'(.*)'")
+                    val commendMatch = commentPattern.matcher(it.trim())
+                    val comment = if (commendMatch.find()) {
+                        commendMatch.group(1)
+                    } else CamelUtil.toCamel(group)
+                    Column(CamelUtil.toCamel(group), typeClass, comment ?: "无注释")
                 }
                 .filter { Objects.nonNull(it) }
         }

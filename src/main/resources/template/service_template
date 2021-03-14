@@ -8,3 +8,5 @@ import java.util.List;
  * @author linuxea
  */
 public interface {{tableCamel}}Service extends BaseService<{{tablePO}}> {
+
+}

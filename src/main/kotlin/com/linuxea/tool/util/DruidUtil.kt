@@ -34,7 +34,6 @@ class Druid(properties: Properties) {
      * @param connection 数据库连接对象
      */
     fun releaseSqlConnection(rSet: ResultSet?, pStatement: PreparedStatement?, connection: Connection?) {
-        println("准备释放数据库连接")
         try {
             rSet?.close()
         } catch (e: SQLException) {

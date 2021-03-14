@@ -52,3 +52,12 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+jar {
+
+    manifest {
+        attributes "Manifest-Version": 1.0,
+                'Main-Class': 'com.linuxea.tool.tool.UnionKt'
+    }
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+}

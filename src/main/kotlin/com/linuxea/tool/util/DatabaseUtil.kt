@@ -21,9 +21,10 @@ class DatabaseUtil {
                 val property = properties.getProperty(next)
                 println("${next}:${property}")
             }
+            println("###################################")
         }
 
-        fun doIt(table: String): List<Column> {
+        fun readColumns(table: String): List<Column> {
             val druid = Druid(this.properties)
             var resultSet: ResultSet? = null
             var connection: Connection? = null
