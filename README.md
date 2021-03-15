@@ -2,9 +2,7 @@
 CRUD 模板，api, client 批量生成
 
 ```bash
-C:\Users\Admin>java -jar C:\Users\Admin\Desktop\platform-system.jar C:\Users\Admin\Desktop\platform_system  platform_system system_org
-[C:\Users\Admin\Desktop\platform_system, platform_system, system_org]
-输入参数要求: path schema table1,table2...
+java -jar C:\Users\Admin\Desktop\platform-system.jar C:\Users\Admin\Desktop\platform_system  platform_system system_org
 ```
 
 
