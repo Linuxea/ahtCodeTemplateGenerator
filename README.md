@@ -2,7 +2,7 @@
 CRUD 模板，api, client 批量生成
 
 ```bash
-java -jar C:\Users\Admin\Desktop\platform-system.jar C:\Users\Admin\Desktop\platform_system  platform_system system_org
+java -jar ahtCodeTool-1.0-SNAPSHOT.jar ./platform_system platform_system system_org
 ```
 
 
