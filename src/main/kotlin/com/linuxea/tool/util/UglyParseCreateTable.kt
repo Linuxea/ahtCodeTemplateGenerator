@@ -1,6 +1,7 @@
 package com.linuxea.tool.util
 
 import com.linuxea.tool.tool.Column
+import com.linuxea.tool.tool.Table
 import java.util.*
 import java.util.regex.Pattern
 
@@ -8,11 +9,12 @@ class UglyParseCreateTable {
 
     companion object {
 
-        fun parse(createSql: String): List<Column> {
+        fun parse(tableName: String, createSql: String): Table {
+            println("$tableName 打印建表语句 : \n${createSql}")
 
             val split = createSql.split("\n")
 
-            return split
+            val columns = split
                 .filter { it.trim().startsWith("`") }
                 .map {
                     val fields = it.trim().split(" ")
@@ -55,6 +57,16 @@ class UglyParseCreateTable {
                     Column(CamelUtil.toCamel(group), typeClass, comment ?: "无注释")
                 }
                 .filter { Objects.nonNull(it) }
+
+
+            val tableCommentPattern = Pattern.compile("COMMENT='(.*)'")
+            val tableCommentMatcher = tableCommentPattern.matcher(createSql)
+            val tableComment = if (tableCommentMatcher.find()) {
+                tableCommentMatcher.group(1)
+            } else "无表注释"
+
+            return Table(tableName, tableComment, columns)
+
         }
     }
 

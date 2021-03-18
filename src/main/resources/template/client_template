@@ -2,9 +2,9 @@ import com.aht.api.order.base.BaseOrderVideoInterviewApi;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
- * {{table_name}} api client
+ * {{table_comment}} client
  *
- * @author linuxea
+ * @author robot
  */
 @FeignClient(name = {{table_api}}.SERVICE_NAME, path = {{table_api}}.CLIENT_PATH)
 public interface {{tableCamel}}Client extends {{table_api}} {

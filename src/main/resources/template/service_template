@@ -3,9 +3,9 @@ import com.aht.web.base.service.BaseService;
 import java.util.List;
 
 /**
- * {{table_name}} service
+ * {{table_comment}} service
  *
- * @author linuxea
+ * @author robot
  */
 public interface {{tableCamel}}Service extends BaseService<{{tablePO}}> {
 

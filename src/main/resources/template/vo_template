@@ -7,12 +7,13 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * {{table_name}} vo
+ * {{table_comment}} vo
  *
- * @author linuxea
+ * @author robot
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@ApiModel(value = "{{table_comment}}VO", description = "{{table_comment}}VO")
 public class {{tableCamel}}VO extends BaseVO {
 
 {{columns}}

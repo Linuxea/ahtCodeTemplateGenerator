@@ -1,5 +1,6 @@
 package com.linuxea.tool.tool
 
+import com.linuxea.tool.util.DatabaseUtil
 import com.linuxea.tool.util.FileUtil
 
 interface Tool {
@@ -13,6 +14,10 @@ interface Tool {
     fun generate(): String
 
     fun fileName(): String
+
+    fun readTable(): Table {
+        return DatabaseUtil.read(this.table)
+    }
 
 
     fun writeFile(fileContext: String) {

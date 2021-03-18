@@ -2,6 +2,7 @@ package com.linuxea.tool.tool.impl
 
 import com.linuxea.tool.util.CamelUtil
 import com.linuxea.tool.util.FileUtil
+import com.linuxea.tool.util.TableNameUtil
 
 class DTOTool(override val table: String, override val path: String) : POTool(table, path) {
 
@@ -12,7 +13,7 @@ class DTOTool(override val table: String, override val path: String) : POTool(ta
 
 
     override fun fileName(): String {
-        return "${CamelUtil.toCamel(this.table).capitalize()}DTO.java"
+        return "${CamelUtil.toCamel(TableNameUtil.tableName(this.table)).capitalize()}DTO.java"
     }
 
 }

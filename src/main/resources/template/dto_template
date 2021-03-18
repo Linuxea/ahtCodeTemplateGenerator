@@ -7,9 +7,9 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * {{table_name}} dto
+ * {{table_comment}} dto
  *
- * @author linuxea
+ * @author robot
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

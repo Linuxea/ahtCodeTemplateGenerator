@@ -1,17 +1,12 @@
 package com.linuxea.tool.tool.impl
 
-import com.linuxea.tool.tool.Column
 import com.linuxea.tool.tool.Tool
 import com.linuxea.tool.util.CamelUtil
-import com.linuxea.tool.util.DatabaseUtil
 import com.linuxea.tool.util.FileUtil
+import com.linuxea.tool.util.TableNameUtil
 
 open class POTool(override val table: String, override val path: String) : Tool {
 
-    private fun readColumn(): List<Column> {
-        val notShowColumn = this.notShowColumn()
-        return DatabaseUtil.readColumns(table).filter { it.name !in notShowColumn }
-    }
 
     private fun notShowColumn(): List<String> {
         return listOf("id", "isDeleted", "generateDate", "modifyDate", "createDate")
@@ -25,7 +20,8 @@ open class POTool(override val table: String, override val path: String) : Tool 
         val readTemplate = readTemplate()
 
         // 构造字段
-        val readColumn = readColumn()
+        val readTable = this.readTable()
+        val readColumn = readTable.columns.filter { it.name !in notShowColumn() }
         val stringBuilder = StringBuilder()
         readColumn.forEach {
             stringBuilder
@@ -41,9 +37,11 @@ open class POTool(override val table: String, override val path: String) : Tool 
                 .append("\n")
         }
 
-        val replace = readTemplate.replace("{{table_name}}", this.table)
-            .replace("{{tableCamel}}", CamelUtil.toCamel(this.table).capitalize())
+        val replace = readTemplate.replace("{{table_name}}", TableNameUtil.tableName(this.table))
+            .replace("{{tableCamel}}", CamelUtil.toCamel(TableNameUtil.tableName(this.table)).capitalize())
             .replace("{{columns}}", stringBuilder.toString())
+            .replace("{{table_comment}}", readTable.comment)
+            .replace("{{full_table_name}}", this.table)
 
 
         this.writeFile(replace)
@@ -52,7 +50,7 @@ open class POTool(override val table: String, override val path: String) : Tool 
     }
 
     override fun fileName(): String {
-        return "${CamelUtil.toCamel(this.table).capitalize()}PO.java"
+        return "${CamelUtil.toCamel(TableNameUtil.tableName(this.table)).capitalize()}PO.java"
     }
 
 }

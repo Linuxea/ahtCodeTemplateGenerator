@@ -1,9 +1,10 @@
 package com.linuxea.tool.util
 
-import com.linuxea.tool.tool.Column
+import com.linuxea.tool.tool.Table
 import java.sql.Connection
 import java.sql.ResultSet
 import java.util.*
+import kotlin.collections.HashMap
 
 class DatabaseUtil {
 
@@ -11,6 +12,7 @@ class DatabaseUtil {
     companion object {
 
         private val properties: Properties = Properties()
+        private val tableMap: HashMap<String, Table> = HashMap()
 
         init {
             val resourceAsStream = this.javaClass.classLoader.getResourceAsStream("db.properties")
@@ -24,27 +26,37 @@ class DatabaseUtil {
             println("###################################")
         }
 
-        fun readColumns(table: String): List<Column> {
+        @Synchronized
+        fun read(tableName: String): Table {
+            val cacheTable = tableMap[tableName]
+            if (cacheTable != null) {
+                return cacheTable
+            }
+
             val druid = Druid(this.properties)
             var resultSet: ResultSet? = null
             var connection: Connection? = null
             try {
                 connection = druid.connection
                 val createStatement = connection.createStatement()
-                createStatement.execute("show create table $table")
+                createStatement.execute("show create table $tableName")
                 resultSet = createStatement.resultSet
                 var createSql = ""
                 while (resultSet.next()) {
                     createSql = (resultSet.getString(2))
                 }
-                return UglyParseCreateTable.parse(createSql)
+                val parseTable = UglyParseCreateTable.parse(tableName, createSql)
+                tableMap[tableName] = parseTable
+                return parseTable
             } catch (e: Exception) {
                 println("发生了异常$e")
             } finally {
                 druid.releaseSqlConnection(resultSet, null, connection)
             }
-            return listOf()
+
+            throw java.lang.Exception("读取表异常")
         }
+
     }
 
 }

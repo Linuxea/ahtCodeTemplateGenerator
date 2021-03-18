@@ -3,6 +3,7 @@ package com.linuxea.tool.tool.impl
 import com.linuxea.tool.tool.Tool
 import com.linuxea.tool.util.CamelUtil
 import com.linuxea.tool.util.FileUtil
+import com.linuxea.tool.util.TableNameUtil
 
 class ServiceTool(override val table: String,override val path: String) : Tool {
 
@@ -13,16 +14,17 @@ class ServiceTool(override val table: String,override val path: String) : Tool {
 
     override fun generate(): String {
         val readTemplate = this.readTemplate()
-        val replace = readTemplate.replace("{{table_name}}", this.table)
-            .replace("{{tableCamel}}", CamelUtil.toCamel(this.table).capitalize())
-            .replace("{{tablePO}}", CamelUtil.toCamel(this.table).capitalize() + "PO")
+        val replace = readTemplate.replace("{{table_name}}", TableNameUtil.tableName(this.table))
+            .replace("{{tableCamel}}", CamelUtil.toCamel(TableNameUtil.tableName(this.table)).capitalize())
+            .replace("{{tablePO}}", CamelUtil.toCamel(TableNameUtil.tableName(this.table)).capitalize() + "PO")
+            .replace("{{table_comment}}", super.readTable().comment)
         this.writeFile(replace)
         return replace
     }
 
 
     override fun fileName(): String {
-        return "${CamelUtil.toCamel(this.table).capitalize()}Service.java"
+        return "${CamelUtil.toCamel(TableNameUtil.tableName(this.table)).capitalize()}Service.java"
     }
 
 }

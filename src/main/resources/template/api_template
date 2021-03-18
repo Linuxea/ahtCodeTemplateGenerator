@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * {{table_name}} api
+ * {{table_comment}} api
  *
- * @author linuxea
+ * @author robot
  */
 public interface {{tableCamel}}Api {
 
-    String SERVICE_NAME = "";
+    String SERVICE_NAME = 这里要完善服务名;
 
-    String CONTEXT = "/";
+    String CONTEXT = 这是要完善上下文路径;
 
-    String BASE_PATH = "/{{tableCamel}}";
+    String BASE_PATH = "/{{tableDecapitalize}}";
 
     String CLIENT_PATH = CONTEXT + BASE_PATH;
 
@@ -33,6 +33,20 @@ public interface {{tableCamel}}Api {
      * @return 分页信息
      */
     @ApiOperation("根据查询条件分页搜索")
+    @PostMapping("/pageList")
+    Result<PageInfo<{{tablePO}}>> list(@RequestBody {{tablePO}} po,
+                              @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize);
+
+    /**
+     * 根据查询条件分页搜索
+     *
+     * @param po       查询条件
+     * @param pageNum  页码
+     * @param pageSize 页长
+     * @return 分页信息
+     */
+    @ApiOperation("根据查询条件递归子机构分页搜索")
     @PostMapping("/pageListWithSubOrg")
     Result<PageInfo<{{tablePO}}>> pageListWithSubOrg(@RequestBody {{tablePO}} po,
                                         @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,

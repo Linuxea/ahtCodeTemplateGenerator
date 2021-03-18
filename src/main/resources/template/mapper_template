@@ -3,9 +3,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
- * {{table_name}} mapper
+ * {{table_comment}} mapper
  *
- * @author linuxea
+ * @author robot
  */
 @Mapper
 @Repository

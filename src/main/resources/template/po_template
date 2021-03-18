@@ -7,13 +7,13 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * {{table_name}} po
+ * {{table_comment}} po
  *
- * @author linuxea
+ * @author robot
  */
 @EqualsAndHashCode(callSuper = true)
-@ApiModel(value = "{{table_name}} 表", description = "{{table_name}} 表")
-@Table(name = "{{table_name}}")
+@ApiModel(value = "{{table_comment}}PO", description = "{{table_comment}}PO")
+@Table(name = "{{full_table_name}}")
 @Data
 public class {{tableCamel}}PO extends BasePO {
 
