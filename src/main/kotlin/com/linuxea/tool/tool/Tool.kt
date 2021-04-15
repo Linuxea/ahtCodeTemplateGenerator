@@ -2,6 +2,7 @@ package com.linuxea.tool.tool
 
 import com.linuxea.tool.util.DatabaseUtil
 import com.linuxea.tool.util.FileUtil
+import java.io.File
 
 interface Tool {
 
@@ -21,8 +22,9 @@ interface Tool {
 
 
     fun writeFile(fileContext: String) {
-        FileUtil.mkdirs("${path}\\${table}")
-        FileUtil.toFile(fileContext, "${path}\\${table}\\${this.fileName()}")
+        val separator = File.separator
+        FileUtil.mkdirs("${path}${separator}${table}")
+        FileUtil.toFile(fileContext, "${path}${separator}${table}${separator}${this.fileName()}")
     }
 
 }
